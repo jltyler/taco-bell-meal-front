@@ -64,6 +64,15 @@ const onAddMeal = (event) => {
   }
 }
 
+const onGetMeals = (event) => {
+  event.preventDefault()
+  if (store.user) {
+    api.getMeals()
+    .done(ui.getMealsSuccess)
+    .catch(ui.getMealsError)
+  }
+}
+
 const attachHandlers = function () {
   // Auth API events
   $('#-form-signup').on('submit', onSignUp)
@@ -71,6 +80,7 @@ const attachHandlers = function () {
   $('#-form-changepw').on('submit', onChangePassword)
   $('#-button-logout').on('click', onSignOut)
   $('#-form-add-meal').on('submit', onAddMeal)
+  $('#-button-get-meals').on('click', onGetMeals)
 }
 
 module.exports = {

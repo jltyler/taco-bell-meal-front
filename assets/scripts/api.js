@@ -51,10 +51,21 @@ const addMeal = (data) => {
   })
 }
 
+const getMeals = () => {
+  return $.ajax({
+    url: config.apiOrigin + '/meals',
+    method: 'GET',
+    headers: {
+      'Authorization': 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
   signOut,
   changePassword,
-  addMeal
+  addMeal,
+  getMeals
 }

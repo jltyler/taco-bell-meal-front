@@ -44,14 +44,46 @@ const changePasswordError = function (response) {
   console.log(response)
 }
 
+const mealListElement = $('#-meal-list')
+const mealListTemplate = require('./templates/meal-list.handlebars')
+
+const populateMealList = (meals) => {
+  mealListElement.html('')
+  console.log('Populating meals list')
+  console.log(meals)
+  const mealListHTML = mealListTemplate({meals})
+  mealListElement.append(mealListHTML)
+}
+
+const addMealToList = (meal) => {
+  const mealHTML = mealListTemplate({meals: [meal]})
+  mealListElement.append(mealHTML)
+  // $(mealListElement).children('[data-id="' + meal.id + '"]').attr('active')
+  // mealListElement.append('<button type="button" class="list-group-item list-group-item-action" data-id="' + meal.id + '">' + meal.name + '</button>')
+}
+
 const addMealSuccess = function (response) {
   console.log('addMealSuccess')
   console.log(response)
-  // store.meal = response.meal
+  addMealToList(response.meal)
+  // store.meal = response.meal // Store meal for use later
+  // Add meal to list of meals for user
+  // Rename meal list title to this meals name
 }
 
 const addMealError = function (response) {
   console.log('addMealError')
+  console.log(response)
+}
+
+const getMealsSuccess = function (response) {
+  console.log('getMealsSuccess')
+  console.log(response)
+  populateMealList(response.meals)
+}
+
+const getMealsError = function (response) {
+  console.log('getMealsError')
   console.log(response)
 }
 
@@ -65,5 +97,7 @@ module.exports = {
   changePasswordSuccess,
   changePasswordError,
   addMealSuccess,
-  addMealError
+  addMealError,
+  getMealsSuccess,
+  getMealsError
 }

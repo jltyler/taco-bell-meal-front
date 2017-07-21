@@ -25,8 +25,8 @@
       <div class="col-md-4">
         <form id="-form-signin" class="form-horizontal" action="index.html" method="post">
           <h2>Sign In!</h2>
-          <input type="text" class="form-control" name="credentials[email]" value="" placeholder="Username">
-          <input type="password" class="form-control" name="credentials[password]" value="" placeholder="Password">
+          <input type="text" class="form-control" name="credentials[email]" value="c" placeholder="Username">
+          <input type="password" class="form-control" name="credentials[password]" value="c" placeholder="Password">
           <button type="submit" class="btn btn-primary" name="button">Sign In!</button>
         </form>
       </div>
@@ -51,14 +51,16 @@
           <input type="text" name="meal[name]" value="" placeholder="Meal name">
           <button type="submit" id="-button-add-meal" class="btn btn-primary btn-lg btn-block" name="add-meal">Add meal</button>
         </form>
-        <ul id="-meals-list">
-        </ul>
+        <button type="button" id="-button-get-meals" name="get meals" class="btn btn-secondary btn-lg btn-block">Get meals</button>
+        <div class="list-group" id="-meal-list"></div>
       </div>
       <div class="col-md-5">
         <h1 class="text-center">Meal Items</h1>
+        <div class="list-group" id="-meal-items-list"></div>
       </div>
       <div class="col-md-5">
         <h1 class="text-center">Menu</h1>
+        <div class="list-group" id="-menu-items-list"></div>
       </div>
     </div>
   </body>

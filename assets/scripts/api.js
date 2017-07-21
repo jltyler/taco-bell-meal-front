@@ -61,11 +61,22 @@ const getMeals = () => {
   })
 }
 
+const deleteMeal = (id) => {
+  return $.ajax({
+    url: config.apiOrigin + '/meals/' + id,
+    method: 'DELETE',
+    headers: {
+      'Authorization': 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
   signOut,
   changePassword,
   addMeal,
-  getMeals
+  getMeals,
+  deleteMeal
 }

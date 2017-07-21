@@ -1,25 +1,60 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <title>Example</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <title>Taco Bell Meals</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <!-- Do not add `link` tags unless you know what you are doing -->
-      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <!-- Do not add `link` tags unless you know what you are doing -->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
-      <!-- Do not add `script` tags unless you know what you are doing -->
-      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
-      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
-    </head>
-    <body class="container-fluid">
-      <h1>Example</h1>
+    <!-- Do not add `script` tags unless you know what you are doing -->
+    <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+    <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+  </head>
+  <body class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+        <form id="-form-signup" class="form-horizontal" action="index.html" method="post">
+          <h2>Sign Up!</h2>
+          <input type="text" class="form-control" name="credentials[email]" value="" placeholder="Username">
+          <input type="password" class="form-control" name="credentials[password]" value="" placeholder="Password">
+          <input type="password" class="form-control" name="credentials[password_confirmation]" value="" placeholder="Password Again">
+          <button type="submit" class="btn btn-primary" name="button">Sign Up!</button>
+        </form>
+      </div>
+      <div class="col-md-4">
+        <form id="-form-signin" class="form-horizontal" action="index.html" method="post">
+          <h2>Sign Up!</h2>
+          <input type="text" class="form-control" name="credentials[email]" value="" placeholder="Username">
+          <input type="password" class="form-control" name="credentials[password]" value="" placeholder="Password">
+          <button type="submit" class="btn btn-primary" name="button">Sign In!</button>
+        </form>
+      </div>
+      <div class="col-md-4">
+        <form id="-form-changepw" class="form-horizontal" action="index.html" method="post">
+          <h2>Change PW</h2>
+          <input type="password" class="form-control" name="passwords[old]" value="" placeholder="Old password">
+          <input type="password" class="form-control" name="passwords[new]" value="" placeholder="New password">
+          <button type="submit" class="btn btn-primary" name="button">Change it!</button>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-8 col-xs-offset-2">
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-      ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p>
-    </body>
+        <button type="button" id="-button-logout" class="btn btn-primary btn-lg btn-block" name="button">LOG OUT!</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <h1 class="text-center">Meals</h1>
+      </div>
+      <div class="col-md-4">
+        <h1 class="text-center">Meal Items</h1>
+      </div>
+      <div class="col-md-4">
+        <h1 class="text-center">Menu</h1>
+      </div>
+    </div>
+  </body>
 </html>

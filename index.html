@@ -24,7 +24,7 @@
       </div>
       <div class="col-md-4">
         <form id="-form-signin" class="form-horizontal" action="index.html" method="post">
-          <h2>Sign Up!</h2>
+          <h2>Sign In!</h2>
           <input type="text" class="form-control" name="credentials[email]" value="" placeholder="Username">
           <input type="password" class="form-control" name="credentials[password]" value="" placeholder="Password">
           <button type="submit" class="btn btn-primary" name="button">Sign In!</button>
@@ -41,18 +41,23 @@
     </div>
     <div class="row">
       <div class="col-xs-8 col-xs-offset-2">
-
         <button type="button" id="-button-logout" class="btn btn-primary btn-lg btn-block" name="button">LOG OUT!</button>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-2">
         <h1 class="text-center">Meals</h1>
+        <form id="-form-add-meal" class="form-horizontal" action="index.html" method="post">
+          <input type="text" name="meal[name]" value="" placeholder="Meal name">
+          <button type="submit" id="-button-add-meal" class="btn btn-primary btn-lg btn-block" name="add-meal">Add meal</button>
+        </form>
+        <ul id="-meals-list">
+        </ul>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-5">
         <h1 class="text-center">Meal Items</h1>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-5">
         <h1 class="text-center">Menu</h1>
       </div>
     </div>

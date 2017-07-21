@@ -71,6 +71,17 @@ const deleteMeal = (id) => {
   })
 }
 
+const updateMeal = (data) => {
+  return $.ajax({
+    url: config.apiOrigin + '/meals/' + store.meal,
+    method: 'PATCH',
+    headers: {
+      'Authorization': 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
@@ -78,5 +89,6 @@ module.exports = {
   changePassword,
   addMeal,
   getMeals,
-  deleteMeal
+  deleteMeal,
+  updateMeal
 }

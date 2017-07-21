@@ -73,6 +73,16 @@ const onGetMeals = (event) => {
   }
 }
 
+const onRenameMeal = (event) => {
+  event.preventDefault()
+  if (store.user && store.meal) {
+    const data = getFormFields(event.target)
+    api.updateMeal(data)
+    .done(ui.renameMealSuccess)
+    .catch(ui.renameMealError)
+  }
+}
+
 const attachHandlers = function () {
   // Auth API events
   $('#-form-signup').on('submit', onSignUp)
@@ -81,6 +91,7 @@ const attachHandlers = function () {
   $('#-button-logout').on('click', onSignOut)
   $('#-form-add-meal').on('submit', onAddMeal)
   $('#-button-get-meals').on('click', onGetMeals)
+  $('#-form-rename-meal').on('submit', onRenameMeal)
 }
 
 module.exports = {

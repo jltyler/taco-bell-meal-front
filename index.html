@@ -45,7 +45,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-md-3">
         <h1 class="text-center">Meals</h1>
         <form id="-form-add-meal" class="form-horizontal" action="index.html" method="post">
           <input type="text" name="meal[name]" value="" placeholder="Meal name">
@@ -55,10 +55,14 @@
         <div class="list-group" id="-meal-list"></div>
       </div>
       <div class="col-md-5">
-        <h1 class="text-center">Meal Items</h1>
+        <span id="-meal-title" class="meal-items-title">Meal Items</span>
+        <form id="-form-rename-meal" class="" action="index.html" method="post">
+          <button id="-button-rename-meal" class="btn btn-primary" type="submit" name="button">Rename</button>
+          <input type="text" name="meal[name]" value="" placeholder="New name">
+        </form>
         <div id="-meal-items-list"></div>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-4">
         <h1 class="text-center">Menu</h1>
         <div class="list-group" id="-menu-items-list"></div>
       </div>

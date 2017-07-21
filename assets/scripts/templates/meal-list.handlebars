@@ -1,7 +1,7 @@
 {{#each meals as |meal|}}
-  <button type="button" class="list-group-item list-group-item-action meal-button" data-id="{{meal.id}}">
+  <button type="button" class="btn btn-primary meal-button" data-id="{{meal.id}}">
     {{meal.name}}
   </button>
-  <button type="button" class="btn btn-info meal-button-rename"  data-id="{{meal.id}}">Rename</button>
-  <button type="button" class="btn btn-danger meal-button-delete"  data-id="{{meal.id}}">X</button>
+  <button type="button" class="btn btn-danger meal-button-delete float-right"  data-id="{{meal.id}}">X</button>
+  <br />
 {{/each}}

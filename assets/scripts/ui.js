@@ -1,5 +1,5 @@
 const store = require('./store')
-const api = require('./api');
+const api = require('./api')
 
 const signUpSuccess = function (response) {
   console.log('signUpSuccess!')
@@ -48,7 +48,10 @@ const changePasswordError = function (response) {
 const selectMeal = function (event) {
   console.log('selectMeal')
   console.log('ID: ', event.target.dataset.id)
+  // console.log('Event:', event.target)
+  mealTitleElement.text($(event.target).text()) // Rename meal list title to this meals name
   store.meal = event.target.dataset.id
+  // Populate Meal Item list
 }
 
 const removeMeal = function (event) {
@@ -62,6 +65,7 @@ const removeMeal = function (event) {
 
 const mealListElement = $('#-meal-list')
 const mealListTemplate = require('./templates/meal-list.handlebars')
+const mealTitleElement = $('#-meal-title')
 
 const populateMealList = (meals) => {
   mealListElement.html('')
@@ -76,7 +80,7 @@ const populateMealList = (meals) => {
 const addMealToList = (meal) => {
   const mealHTML = mealListTemplate({meals: [meal]})
   mealListElement.append(mealHTML)
-  $(mealListElement).children('[data-id="' + meal.id + '"]').addClass('active')
+  // $(mealListElement).children('[data-id="' + meal.id + '"]').addClass('active')
   // mealListElement.append('<button type="button" class="list-group-item list-group-item-action" data-id="' + meal.id + '">' + meal.name + '</button>')
 }
 
@@ -85,7 +89,8 @@ const addMealSuccess = function (response) {
   console.log(response)
   addMealToList(response.meal) // Add meal to list of meals in the DOM
   store.meal = response.meal.id // Store meal for use later
-  // Rename meal list title to this meals name
+  mealTitleElement.text(response.meal.name) // Rename meal list title to this meals name
+  // Populate Meal Item list
 }
 
 const addMealError = function (response) {
@@ -116,6 +121,20 @@ const deleteMealError = function (response) {
   console.log(response)
 }
 
+const renameMealSuccess = function (response) {
+  console.log('renameMealSuccess')
+  console.log(response)
+  const meal = response.meal
+  mealTitleElement.text(meal.name)
+  $('.meal-button[data-id=' + meal.id + ']').text(meal.name)
+  $('#-form-rename-meal input').val('')
+}
+
+const renameMealError = function (response) {
+  console.log('renameMealError')
+  console.log(response)
+}
+
 module.exports = {
   signUpSuccess,
   signUpError,
@@ -130,5 +149,7 @@ module.exports = {
   getMealsSuccess,
   getMealsError,
   deleteMealSuccess,
-  deleteMealError
+  deleteMealError,
+  renameMealSuccess,
+  renameMealError
 }

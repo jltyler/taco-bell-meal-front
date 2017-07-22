@@ -82,6 +82,16 @@ const updateMeal = (data) => {
   })
 }
 
+const getMealItems = () => {
+  return $.ajax({
+    url: config.apiOrigin + '/meal-items/' + store.meal,
+    method: 'GET',
+    headers: {
+      'Authorization': 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
@@ -90,5 +100,6 @@ module.exports = {
   addMeal,
   getMeals,
   deleteMeal,
-  updateMeal
+  updateMeal,
+  getMealItems
 }

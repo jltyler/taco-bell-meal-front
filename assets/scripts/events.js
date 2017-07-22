@@ -83,6 +83,16 @@ const onRenameMeal = (event) => {
   }
 }
 
+const onGetMealItems = (event) => {
+  event.preventDefault()
+  if (store.user && store.meal) {
+    const data = getFormFields(event.target)
+    api.updateMeal(data)
+    .done(ui.getMealItemsSuccess)
+    .catch(ui.getMealItemsError)
+  }
+}
+
 const attachHandlers = function () {
   // Auth API events
   $('#-form-signup').on('submit', onSignUp)

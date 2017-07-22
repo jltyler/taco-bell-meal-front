@@ -51,7 +51,11 @@ const selectMeal = function (event) {
   // console.log('Event:', event.target)
   mealTitleElement.text($(event.target).text()) // Rename meal list title to this meals name
   store.meal = event.target.dataset.id
-  // Populate Meal Item list
+   // API call to get meal items
+   // Populate Meal Item list
+  api.getMealItems()
+  .done(getMealItemsSuccess)
+  .catch(getMealItemsError)
 }
 
 const removeMeal = function (event) {
@@ -135,6 +139,36 @@ const renameMealError = function (response) {
   console.log(response)
 }
 
+const mealItemsElement = $('#-meal-items-list')
+const mealItemsTemplate = require('./templates/meal-items.handlebars')
+
+const populateMealItems = function (items) {
+  mealItemsElement.html('')
+  const mealItemsHTML = mealItemsTemplate({items}) // Use template to get HTML element(s)
+  mealItemsElement.append(mealItemsHTML)
+}
+
+const onGetMealItems = (event) => {
+  event.preventDefault()
+  if (store.user && store.meal) {
+    api.getMealItems()
+    .done(getMealItemsSuccess)
+    .catch(getMealItemsError)
+  }
+}
+
+const getMealItemsSuccess = function (response) {
+  console.log('getMealItemsSuccess')
+  console.log(response)
+  // Populate meal items list
+  populateMealItems(response.menu_items)
+}
+
+const getMealItemsError = function (response) {
+  console.log('getMealItemsError')
+  console.log(response)
+}
+
 module.exports = {
   signUpSuccess,
   signUpError,
@@ -151,5 +185,7 @@ module.exports = {
   deleteMealSuccess,
   deleteMealError,
   renameMealSuccess,
-  renameMealError
+  renameMealError,
+  getMealItemsSuccess,
+  getMealItemsError
 }

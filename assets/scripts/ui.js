@@ -169,6 +169,27 @@ const getMealItemsError = function (response) {
   console.log(response)
 }
 
+const menuItemsElement = $('#-menu-items-list')
+const menuItemsTemplate = require('./templates/menu-items.handlebars')
+
+const populateMenuItems = function (items) {
+  menuItemsElement.html('')
+  const menuItemsHTML = menuItemsTemplate({items}) // Use template to get HTML element(s)
+  menuItemsElement.append(menuItemsHTML)
+}
+
+const getMenuItemsSuccess = function (response) {
+  console.log('getMenuItemsSuccess')
+  console.log(response)
+  populateMenuItems(response.menu_items)
+}
+
+const getMenuItemsError = function (response) {
+  console.log('getMenuItemsError')
+  console.log(response)
+}
+
+
 module.exports = {
   signUpSuccess,
   signUpError,
@@ -187,5 +208,7 @@ module.exports = {
   renameMealSuccess,
   renameMealError,
   getMealItemsSuccess,
-  getMealItemsError
+  getMealItemsError,
+  getMenuItemsSuccess,
+  getMenuItemsError
 }

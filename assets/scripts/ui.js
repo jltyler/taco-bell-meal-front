@@ -47,14 +47,18 @@ const changePasswordError = function (response) {
 
 const selectMeal = function (event) {
   console.log('selectMeal')
-  console.log('ID: ', event.target.dataset.id)
+  const mealId = event.target.dataset.id
+  console.log('ID: ', mealId)
   // console.log('Event:', event.target)
-  mealTitleElement.text($(event.target).text()) // Rename meal list title to this meals name
-  store.meal = event.target.dataset.id
    // API call to get meal items
    // Populate Meal Item list
-  api.getMealItems()
-  .done(getMealItemsSuccess)
+  api.getMealItems(mealId)
+  .done(function (response) {
+    getMealItemsSuccess(response)
+    // Rename meal list title to this meals name
+    mealTitleElement.text($(event.target).text())
+    store.meal = mealId
+  })
   .catch(getMealItemsError)
 }
 
@@ -116,8 +120,9 @@ const getMealsError = function (response) {
 const deleteMealSuccess = function (response) {
   console.log('deleteMealSuccess')
   console.log(response)
-  console.log($('[data-id=' + store.deleting + ']'))
-  $('[data-id=' + store.deleting + ']').remove() // Remove the item clicked
+  // console.log($('[data-id=' + store.deleting + ']'))
+  $('.meal-button[data-id=' + store.deleting + ']').remove() // Remove the item clicked
+  $('.meal-button-delete[data-id=' + store.deleting + ']').remove()
 }
 
 const deleteMealError = function (response) {
@@ -148,14 +153,14 @@ const populateMealItems = function (items) {
   mealItemsElement.append(mealItemsHTML)
 }
 
-const onGetMealItems = (event) => {
-  event.preventDefault()
-  if (store.user && store.meal) {
-    api.getMealItems()
-    .done(getMealItemsSuccess)
-    .catch(getMealItemsError)
-  }
-}
+// const onGetMealItems = (event) => {
+//   event.preventDefault()
+//   if (store.user && store.meal) {
+//     api.getMealItems()
+//     .done(getMealItemsSuccess)
+//     .catch(getMealItemsError)
+//   }
+// }
 
 const getMealItemsSuccess = function (response) {
   console.log('getMealItemsSuccess')
@@ -172,10 +177,32 @@ const getMealItemsError = function (response) {
 const menuItemsElement = $('#-menu-items-list')
 const menuItemsTemplate = require('./templates/menu-items.handlebars')
 
+const onAddMealItem = (event) => {
+  event.preventDefault()
+  console.log('Event: ', event)
+  if (store.user && store.meal) {
+    const menuId = event.target.dataset.id
+    console.log('Menu ID: ', menuId)
+    api.addMealItem(menuId)
+    .done(function (response) {
+      addMealItemSuccess(response)
+      // Use template to get HTML element(s)
+      const mealItemsHTML = mealItemsTemplate({items: [{
+        id: menuId,
+        name: $('.menu-item[data-id=' + menuId + ']').text()
+      }]})
+      mealItemsElement.append(mealItemsHTML)
+    })
+    .catch(addMealItemError)
+  }
+}
+
 const populateMenuItems = function (items) {
   menuItemsElement.html('')
   const menuItemsHTML = menuItemsTemplate({items}) // Use template to get HTML element(s)
   menuItemsElement.append(menuItemsHTML)
+  // Attach add item event to menu items button
+  $('.menu-button-add').on('click', onAddMealItem)
 }
 
 const getMenuItemsSuccess = function (response) {
@@ -186,6 +213,16 @@ const getMenuItemsSuccess = function (response) {
 
 const getMenuItemsError = function (response) {
   console.log('getMenuItemsError')
+  console.log(response)
+}
+
+const addMealItemSuccess = function (response) {
+  console.log('addMealItemSuccess')
+  console.log(response)
+}
+
+const addMealItemError = function (response) {
+  console.log('addMealItemError')
   console.log(response)
 }
 

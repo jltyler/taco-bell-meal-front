@@ -61,9 +61,9 @@ const getMeals = () => {
   })
 }
 
-const deleteMeal = (id) => {
+const deleteMeal = (mealId) => {
   return $.ajax({
-    url: config.apiOrigin + '/meals/' + id,
+    url: config.apiOrigin + '/meals/' + mealId,
     method: 'DELETE',
     headers: {
       'Authorization': 'Token token=' + store.user.token
@@ -82,9 +82,9 @@ const updateMeal = (data) => {
   })
 }
 
-const getMealItems = () => {
+const getMealItems = (mealId) => {
   return $.ajax({
-    url: config.apiOrigin + '/meal-items/' + store.meal,
+    url: config.apiOrigin + '/meal-items/' + mealId,
     method: 'GET',
     headers: {
       'Authorization': 'Token token=' + store.user.token
@@ -102,6 +102,22 @@ const getMenuItems = () => {
   })
 }
 
+const addMealItem = (menuItemId) => {
+  return $.ajax({
+    url: config.apiOrigin + '/add-item/' + store.meal,
+    method: 'POST',
+    headers: {
+      'Authorization': 'Token token=' + store.user.token
+    },
+    dataType: 'json text',
+    data: {
+      meal: {
+        menu_item_id: menuItemId
+      }
+    }
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
@@ -112,5 +128,6 @@ module.exports = {
   deleteMeal,
   updateMeal,
   getMealItems,
-  getMenuItems
+  getMenuItems,
+  addMealItem
 }

@@ -1,15 +1,17 @@
 // Events that fire when things are clicked
 
-const api = require('./api')
+const authApi = require('./api/auth')
+const mealsApi = require('./api/meals')
 const getFormFields = require('../../lib/get-form-fields')
-const ui = require('./ui')
+const authUi = require('./ui/auth')
+const mealsUi = require('./ui/meals')
 const store = require('./store')
 
 const onSignUp = (event) => {
   event.preventDefault()
   const data = getFormFields(event.target)
-  api.signUp(data)
-    .done(ui.signUpSuccess
+  authApi.signUp(data)
+    .done(authUi.signUpSuccess
       // function (response) {
       // const sdata = {
       //   credentials: {
@@ -17,28 +19,28 @@ const onSignUp = (event) => {
       //     password: data.credentials.password
       //   }
       // }
-      // api.signIn(sdata)
-      //   .done(ui.signInSuccess)
-      //   .catch(ui.signInError)
+      // authApi.signIn(sdata)
+      //   .done(authUi.signInSuccess)
+      //   .catch(authUi.signInError)
       // }
     )
-    .catch(ui.signUpError)
+    .catch(authUi.signUpError)
 }
 
 const onSignIn = (event) => {
   event.preventDefault()
   const data = getFormFields(event.target)
-  api.signIn(data)
-    .done(ui.signInSuccess)
-    .catch(ui.signInError)
+  authApi.signIn(data)
+    .done(authUi.signInSuccess)
+    .catch(authUi.signInError)
 }
 
 const onSignOut = (event) => {
   event.preventDefault()
   if (store.user) {
-    api.signOut()
-    .done(ui.signOutSuccess)
-    .catch(ui.signOutError)
+    authApi.signOut()
+    .done(authUi.signOutSuccess)
+    .catch(authUi.signOutError)
   } else {
   }
 }
@@ -47,9 +49,9 @@ const onChangePassword = (event) => {
   event.preventDefault()
   if (store.user) {
     const data = getFormFields(event.target)
-    api.changePassword(data)
-    .done(ui.changePasswordSuccess)
-    .catch(ui.changePasswordError)
+    authApi.changePassword(data)
+    .done(authUi.changePasswordSuccess)
+    .catch(authUi.changePasswordError)
   } else {
   }
 }
@@ -58,18 +60,18 @@ const onAddMeal = (event) => {
   event.preventDefault()
   if (store.user) {
     const data = getFormFields(event.target)
-    api.addMeal(data)
-    .done(ui.addMealSuccess)
-    .catch(ui.addMealError)
+    mealsApi.addMeal(data)
+    .done(mealsUi.addMealSuccess)
+    .catch(mealsUi.addMealError)
   }
 }
 
 const onGetMeals = (event) => {
   event.preventDefault()
   if (store.user) {
-    api.getMeals()
-    .done(ui.getMealsSuccess)
-    .catch(ui.getMealsError)
+    mealsApi.getMeals()
+    .done(mealsUi.getMealsSuccess)
+    .catch(mealsUi.getMealsError)
   }
 }
 
@@ -77,30 +79,29 @@ const onRenameMeal = (event) => {
   event.preventDefault()
   if (store.user && store.meal) {
     const data = getFormFields(event.target)
-    api.updateMeal(data)
-    .done(ui.renameMealSuccess)
-    .catch(ui.renameMealError)
+    mealsApi.updateMeal(data)
+    .done(mealsUi.renameMealSuccess)
+    .catch(mealsUi.renameMealError)
   }
 }
 
 const onGetMealItems = (event) => {
   event.preventDefault()
   if (store.user && store.meal) {
-    api.updateMeal()
-    .done(ui.getMealItemsSuccess)
-    .catch(ui.getMealItemsError)
+    mealsApi.updateMeal()
+    .done(mealsUi.getMealItemsSuccess)
+    .catch(mealsUi.getMealItemsError)
   }
 }
 
 const onGetMenuItems = (event) => {
   event.preventDefault()
   if (store.user) {
-    api.getMenuItems()
-    .done(ui.getMenuItemsSuccess)
-    .catch(ui.getMenuItemsError)
+    mealsApi.getMenuItems()
+    .done(mealsUi.getMenuItemsSuccess)
+    .catch(mealsUi.getMenuItemsError)
   }
 }
-
 
 const attachHandlers = function () {
   // Auth API events

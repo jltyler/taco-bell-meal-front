@@ -1,49 +1,5 @@
-const store = require('./store')
-const api = require('./api')
-
-const signUpSuccess = function (response) {
-  console.log('signUpSuccess!')
-  console.log(response)
-}
-
-const signUpError = function (response) {
-  console.log('signUpError!')
-  console.log(response)
-}
-
-const signInSuccess = function (response) {
-  console.log('signInSuccess!')
-  console.log(response)
-  store.user = response.user
-  console.log('store.user:', store.user)
-}
-
-const signInError = function (response) {
-  console.log('signInError!')
-  console.log(response)
-}
-
-const signOutSuccess = function (response) {
-  console.log('signOutSuccess!')
-  console.log(response)
-  store.user = undefined
-  console.log('store.user:', store.user)
-}
-
-const signOutError = function (response) {
-  console.log('signOutError!')
-  console.log(response)
-}
-
-const changePasswordSuccess = function (response) {
-  console.log('changePasswordSuccess!')
-  console.log(response)
-}
-
-const changePasswordError = function (response) {
-  console.log('changePasswordError!')
-  console.log(response)
-}
+const store = require('../store')
+const mealsApi = require('../api/meals')
 
 const selectMeal = function (event) {
   console.log('selectMeal')
@@ -52,7 +8,7 @@ const selectMeal = function (event) {
   // console.log('Event:', event.target)
    // API call to get meal items
    // Populate Meal Item list
-  api.getMealItems(mealId)
+  mealsApi.getMealItems(mealId)
   .done(function (response) {
     getMealItemsSuccess(response)
     // Rename meal list title to this meals name
@@ -66,13 +22,13 @@ const removeMeal = function (event) {
   console.log('removeMeal')
   console.log('ID: ', event.target.dataset.id)
   store.deleting = event.target.dataset.id
-  api.deleteMeal(event.target.dataset.id)
+  mealsApi.deleteMeal(event.target.dataset.id)
   .done(deleteMealSuccess)
   .catch(deleteMealError)
 }
 
 const mealListElement = $('#-meal-list')
-const mealListTemplate = require('./templates/meal-list.handlebars')
+const mealListTemplate = require('../templates/meal-list.handlebars')
 const mealTitleElement = $('#-meal-title')
 
 const populateMealList = (meals) => {
@@ -145,18 +101,19 @@ const renameMealError = function (response) {
 }
 
 const mealItemsElement = $('#-meal-items-list')
-const mealItemsTemplate = require('./templates/meal-items.handlebars')
+const mealItemsTemplate = require('../templates/meal-items.handlebars')
 
 const populateMealItems = function (items) {
   mealItemsElement.html('')
   const mealItemsHTML = mealItemsTemplate({items}) // Use template to get HTML element(s)
   mealItemsElement.append(mealItemsHTML)
+  $('.meal-item-button-delete').on('click', onDeleteMealItem)
 }
 
 // const onGetMealItems = (event) => {
 //   event.preventDefault()
 //   if (store.user && store.meal) {
-//     api.getMealItems()
+//     mealsApi.getMealItems()
 //     .done(getMealItemsSuccess)
 //     .catch(getMealItemsError)
 //   }
@@ -175,15 +132,15 @@ const getMealItemsError = function (response) {
 }
 
 const menuItemsElement = $('#-menu-items-list')
-const menuItemsTemplate = require('./templates/menu-items.handlebars')
+const menuItemsTemplate = require('../templates/menu-items.handlebars')
 
 const onAddMealItem = (event) => {
   event.preventDefault()
-  console.log('Event: ', event)
+  console.log('onAddMealItem: ', event)
   if (store.user && store.meal) {
     const menuId = event.target.dataset.id
     console.log('Menu ID: ', menuId)
-    api.addMealItem(menuId)
+    mealsApi.addMealItem(menuId)
     .done(function (response) {
       addMealItemSuccess(response)
       // Use template to get HTML element(s)
@@ -226,16 +183,34 @@ const addMealItemError = function (response) {
   console.log(response)
 }
 
+const onDeleteMealItem = (event) => {
+  event.preventDefault()
+  console.log('onDeleteMealItem: ', event)
+  if (store.user && store.meal) {
+    const menuId = event.target.dataset.id
+    console.log('Menu ID: ', menuId)
+    mealsApi.deleteMealItem(menuId)
+    .done(function (response) {
+      deleteMealItemSuccess(response)
+      // $('meal-item[data-id=' + menuId + ']').remove()
+      $(event.target).parent().remove()
+      // $('meal-item-button-delete[data-id=' + menuId + ']').remove()
+    })
+    .catch(deleteMealItemError)
+  }
+}
+
+const deleteMealItemSuccess = function (response) {
+  console.log('deleteMealItemSuccess')
+  console.log(response)
+}
+
+const deleteMealItemError = function (response) {
+  console.log('deleteMealItemError')
+  console.log(response)
+}
 
 module.exports = {
-  signUpSuccess,
-  signUpError,
-  signInSuccess,
-  signInError,
-  signOutSuccess,
-  signOutError,
-  changePasswordSuccess,
-  changePasswordError,
   addMealSuccess,
   addMealError,
   getMealsSuccess,

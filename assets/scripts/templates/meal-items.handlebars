@@ -1,7 +1,6 @@
 {{#each items as |item|}}
-  <span class="meal-item" data-id="{{item.id}}">
+  <div class="meal-item" data-id="{{item.id}}">
     {{item.name}}
-  </span>
-  <button type="button" class="btn btn-danger meal-item-button-delete float-right"  data-id="{{item.id}}">X</button>
-  <br />
+    <button type="button" class="btn btn-danger meal-item-button-delete float-right" data-id="{{item.id}}">X</button>
+  </div>
 {{/each}}

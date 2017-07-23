@@ -1,44 +1,5 @@
-// Holds functions to help with the AJAX calls to the back-end
-
-const config = require('./config')
-const store = require('./store')
-
-const signUp = (data) => {
-  return $.ajax({
-    url: config.apiOrigin + '/sign-up',
-    method: 'POST',
-    data
-  })
-}
-
-const signIn = (data) => {
-  return $.ajax({
-    url: config.apiOrigin + '/sign-in',
-    method: 'POST',
-    data
-  })
-}
-
-const signOut = () => {
-  return $.ajax({
-    url: config.apiOrigin + '/sign-out/' + store.user.id,
-    method: 'DELETE',
-    headers: {
-      'Authorization': 'Token token=' + store.user.token
-    }
-  })
-}
-
-const changePassword = (data) => {
-  return $.ajax({
-    url: config.apiOrigin + '/change-password/' + store.user.id,
-    method: 'PATCH',
-    headers: {
-      'Authorization': 'Token token=' + store.user.token
-    },
-    data
-  })
-}
+const config = require('../config')
+const store = require('../store')
 
 const addMeal = (data) => {
   return $.ajax({
@@ -118,16 +79,29 @@ const addMealItem = (menuItemId) => {
   })
 }
 
+const deleteMealItem = (menuItemId) => {
+  return $.ajax({
+    url: config.apiOrigin + '/delete-item/' + store.meal,
+    method: 'DELETE',
+    headers: {
+      'Authorization': 'Token token=' + store.user.token
+    },
+    dataType: 'json text',
+    data: {
+      meal: {
+        menu_item_id: menuItemId
+      }
+    }
+  })
+}
+
 module.exports = {
-  signUp,
-  signIn,
-  signOut,
-  changePassword,
   addMeal,
   getMeals,
   deleteMeal,
   updateMeal,
   getMealItems,
   getMenuItems,
-  addMealItem
+  addMealItem,
+  deleteMealItem
 }

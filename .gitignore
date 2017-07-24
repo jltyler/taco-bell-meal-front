@@ -7,7 +7,7 @@ _SpecRunner.html
 *.woff2
 *.woff
 *.svg
-*.ttf
+# *.ttf
 *.eot
 public/
 

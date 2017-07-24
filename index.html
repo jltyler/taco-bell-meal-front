@@ -39,30 +39,36 @@
     </nav>
     <!-- NAVBAR END -->
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-lg-3">
         <div class="meal-div hidden">
           <h1 class="text-center">Meals</h1>
-          <button id="-addmeal-button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#-addmeal-modal">Add meal</button>
+          <button id="-addmeal-button" class="btn btn-lg btn-primary btn-block" data-toggle="modal" data-target="#-addmeal-modal">New meal</button>
+          <br />
           <div class="tb-list" id="-meal-list"></div>
         </div>
       </div>
-      <div class="col-md-5">
+      <div class="col-lg-5">
         <div class="signin-to-continue">
           <h1>Sign in to continue!</h1>
         </div>
         <div class="meal-items-div hidden">
-          <span id="-meal-title" class="meal-items-title">No meal selected!</span>
-          <button id="-renamemeal-button" class="btn btn-primary hidden" data-toggle="modal" data-target="#-renamemeal-modal"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+          <div id="-meal-title" class="meal-items-title">
+            <h1>No meal selected!</h1>
+          </div>
+          <div class="meal-items-title">
+            <button id="-renamemeal-button" class="btn btn-lg btn-primary hidden" data-toggle="modal" data-target="#-renamemeal-modal"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+          </div>
           <div class="tb-list" id="-meal-items-list"></div>
         </div>
       </div>
-      <div class="col-md-4 menu-items-div">
+      <div class="col-lg-4 menu-items-div">
         <h1 class="text-center">Menu</h1>
         <div class="tb-list" id="-menu-items-list"></div>
       </div>
     </div>
     <!-- END MAIN CONTENT -->
-
+    <audio id="-bell-snd" src="assets/snd/bell.mp3" ></audio>
+    <audio id="-yoquiero-snd" src="assets/snd/yoquiero.mp3" ></audio>
     <!-- ONLY MODALS BEYOND THIS POINT -->
     <!-- Sign up / log in modal -->
     <div class="modal fade" id="-signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

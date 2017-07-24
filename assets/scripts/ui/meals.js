@@ -1,5 +1,7 @@
 const store = require('../store')
 const mealsApi = require('../api/meals')
+const bellSound = document.getElementById('-bell-snd')
+const yoquieroSound = document.getElementById('-yoquiero-snd')
 
 const selectMeal = function (event) {
   console.log('selectMeal')
@@ -15,6 +17,7 @@ const selectMeal = function (event) {
     mealTitleElement.text($(event.target).text())
     store.meal = mealId
     $('#-renamemeal-button').removeClass('hidden')
+    yoquieroSound.play()
   })
   .catch(getMealItemsError)
 }
@@ -30,7 +33,7 @@ const removeMeal = function (event) {
 
 const mealListElement = $('#-meal-list')
 const mealListTemplate = require('../templates/meal-list.handlebars')
-const mealTitleElement = $('#-meal-title')
+const mealTitleElement = $('#-meal-title').find('h1')
 
 const clearMealList = function () {
   mealListElement.html('')
@@ -72,6 +75,7 @@ const addMealSuccess = function (response) {
   clearAddMealForm()
   $('#-addmeal-modal').modal('hide')
 
+  yoquieroSound.play()
   // clear Meal Item list
   clearMealItems()
 }
@@ -151,15 +155,6 @@ const populateMealItems = function (items) {
   $('.meal-item-button-delete').on('click', onDeleteMealItem)
 }
 
-// const onGetMealItems = (event) => {
-//   event.preventDefault()
-//   if (store.user && store.meal) {
-//     mealsApi.getMealItems()
-//     .done(getMealItemsSuccess)
-//     .catch(getMealItemsError)
-//   }
-// }
-
 const getMealItemsSuccess = function (response) {
   console.log('getMealItemsSuccess')
   console.log(response)
@@ -219,6 +214,7 @@ const getMenuItemsError = function (response) {
 const addMealItemSuccess = function (response) {
   console.log('addMealItemSuccess')
   console.log(response)
+  bellSound.play()
 }
 
 const addMealItemError = function (response) {
@@ -236,7 +232,7 @@ const onDeleteMealItem = (event) => {
     .done(function (response) {
       deleteMealItemSuccess(response)
       // $('meal-item[data-id=' + menuId + ']').remove()
-      $(event.target).parent().remove()
+      $(event.target).closest('.meal-item').remove()
       // $('meal-item-button-delete[data-id=' + menuId + ']').remove()
     })
     .catch(deleteMealItemError)

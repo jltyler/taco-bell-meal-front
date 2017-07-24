@@ -1,6 +1,6 @@
 {{#each items as |item|}}
   <div class="meal-item" data-id="{{item.id}}">
-    {{item.name}}
-    <button type="button" class="btn btn-danger meal-item-button-delete float-right" data-id="{{item.id}}"><i class="fa fa-trash" data-id="{{item.id}}" aria-hidden="true"></i></button>
+    <div>{{item.name}}</div>
+    <button type="button" class="btn btn-lg btn-danger meal-item-button-delete" data-id="{{item.id}}"><i class="fa fa-trash" data-id="{{item.id}}" aria-hidden="true"></i></button>
   </div>
 {{/each}}

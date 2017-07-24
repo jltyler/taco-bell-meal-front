@@ -1,9 +1,9 @@
 {{#each meals as |meal|}}
   <div class="meal-div" data-id="{{meal.id}}">
-    <button type="button" class="btn btn-primary meal-button" data-id="{{meal.id}}">
+    <button type="button" class="btn btn-lg btn-primary meal-button" data-id="{{meal.id}}">
       {{meal.name}}
     </button>
-    <button type="button" class="btn btn-danger meal-button-delete float-right" data-id="{{meal.id}}"><i class="fa fa-trash" data-id="{{meal.id}}" aria-hidden="true"></i>
-</button>
+    <button type="button" class="btn btn-lg btn-danger meal-button-delete float-right" data-id="{{meal.id}}"><i class="fa fa-trash" data-id="{{meal.id}}" aria-hidden="true"></i>
+    </button>
   </div>
 {{/each}}

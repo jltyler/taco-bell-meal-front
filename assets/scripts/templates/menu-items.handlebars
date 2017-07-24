@@ -1,7 +1,6 @@
 {{#each items as |item|}}
-  <button type="button" class="btn btn-success menu-button-add float-right"  data-id="{{item.id}}">+</button>
-  <span class="menu-item" data-id="{{item.id}}">
-    {{item.name}}
-  </span>
-  <br />
+  <div class="menu-item">
+    <button type="button" class="btn btn-success menu-button-add float-right"  data-id="{{item.id}}"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+    <span class="menu-item-span" data-id="{{item.id}}">{{item.name}}</span>
+</div>
 {{/each}}

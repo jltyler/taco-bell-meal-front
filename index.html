@@ -10,6 +10,7 @@
     <!-- Do not add `script` tags unless you know what you are doing -->
     <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
     <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    <script src="https://use.fontawesome.com/4edafb88a2.js"></script>
   </head>
   <body class="container-fluid">
     <!-- NAVBAR START -->
@@ -28,9 +29,6 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="-main-navbar-collapse">
-          <!-- <ul class="nav navbar-nav">
-            <li><a href="#" data-toggle="modal" data-target="#-signup-modal" id="-signup-button">Login or Signup</a></li>
-          </ul> -->
           <ul class="nav navbar-nav navbar-right">
             <li><a class="hidden" id="-logout-button" href="#">Logout</a></li>
             <li><a class="hidden" id="-changepwd-button" href="#" data-toggle="modal" data-target="#-changepwd-modal">Change Password</a></li>
@@ -40,69 +38,26 @@
       </div><!-- /.container-fluid -->
     </nav>
     <!-- NAVBAR END -->
-    <!-- <div class="row">
-      <div class="col-md-4">
-        <form id="-form-signup" class="form-horizontal" action="index.html" method="post">
-          <h2>Sign Up!</h2>
-          <input type="text" class="form-control" name="credentials[email]" value="" placeholder="Username">
-          <input type="password" class="form-control" name="credentials[password]" value="" placeholder="Password">
-          <input type="password" class="form-control" name="credentials[password_confirmation]" value="" placeholder="Password Again">
-          <button type="submit" class="btn btn-primary" name="button">Sign Up!</button>
-        </form>
-      </div>
-      <div class="col-md-4">
-        <form id="-form-signin" class="form-horizontal" action="index.html" method="post">
-          <h2>Sign In!</h2>
-          <input type="text" class="form-control" name="credentials[email]" value="c" placeholder="Username">
-          <input type="password" class="form-control" name="credentials[password]" value="c" placeholder="Password">
-          <button type="submit" class="btn btn-primary" name="button">Sign In!</button>
-        </form>
-      </div>
-      <div class="col-md-4">
-        <form id="-form-changepw" class="form-horizontal" action="index.html" method="post">
-          <h2>Change PW</h2>
-          <input type="password" class="form-control" name="passwords[old]" value="" placeholder="Old password">
-          <input type="password" class="form-control" name="passwords[new]" value="" placeholder="New password">
-          <button type="submit" class="btn btn-primary" name="button">Change it!</button>
-        </form>
-      </div>
-    </div> -->
-    <!-- <div class="row">
-      <div class="col-xs-8 col-xs-offset-2">
-        <button type="button" id="-button-logout" class="btn btn-primary btn-lg btn-block" name="button">LOG OUT!</button>
-      </div>
-    </div> -->
     <div class="row">
       <div class="col-md-3">
         <div class="meal-div hidden">
           <h1 class="text-center">Meals</h1>
           <button id="-addmeal-button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#-addmeal-modal">Add meal</button>
-
-          <!-- <form id="-form-add-meal" class="form-horizontal" action="index.html" method="post">
-            <input type="text" name="meal[name]" value="" placeholder="Meal name">
-            <button type="submit" id="-button-add-meal" class="btn btn-primary btn-lg btn-block" name="add-meal">Add meal</button>
-          </form> -->
-          <!-- <button type="button" id="-button-get-meals" name="get meals" class="btn btn-secondary btn-lg btn-block">Get meals</button> -->
           <div class="tb-list" id="-meal-list"></div>
         </div>
       </div>
       <div class="col-md-5">
         <div class="signin-to-continue">
-          <h1>You must sign in to continue!</h1>
+          <h1>Sign in to continue!</h1>
         </div>
         <div class="meal-items-div hidden">
           <span id="-meal-title" class="meal-items-title">No meal selected!</span>
-          <button id="-renamemeal-button" class="btn btn-primary hidden" data-toggle="modal" data-target="#-renamemeal-modal">Rename</button>
-          <!-- <form id="-form-rename-meal" class="" action="index.html" method="post">
-            <button id="-button-rename-meal" class="btn btn-primary" type="submit" name="button">Rename</button>
-            <input type="text" name="meal[name]" value="" placeholder="New name">
-          </form> -->
+          <button id="-renamemeal-button" class="btn btn-primary hidden" data-toggle="modal" data-target="#-renamemeal-modal"><i class="fa fa-pencil" aria-hidden="true"></i></button>
           <div class="tb-list" id="-meal-items-list"></div>
         </div>
       </div>
       <div class="col-md-4 menu-items-div">
         <h1 class="text-center">Menu</h1>
-        <!-- <button type="button" id="-button-get-menu" name="get menu" class="btn btn-primary btn-lg btn-block">Get MENU</button> -->
         <div class="tb-list" id="-menu-items-list"></div>
       </div>
     </div>

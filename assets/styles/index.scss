@@ -21,10 +21,46 @@ body {
   background-color: $tbpink;
   border-color: $tbpink;
   color: $tbyellow;
+  .navbar-brand,
+  .navbar-nav li a {
+    color: $tbyellow;
+  }
+}
+
+.navbar .navbar-nav li a:hover,
+.navbar .navbar-nav li a:focus,
+.navbar .navbar-brand:hover {
+  color: $tbpurple;
+}
+
+.meal-button {
+  width: 79%;
+}
+
+.meal-button-delete {
+  float: right;
+  width: 20%;
+}
+
+.meal-item-button-delete {
+  float: right;
+}
+
+.meal-item {
+  display: inline-block;
+  width: 100%;
+  padding-bottom: 4px;
+  span {
+    padding-top: 15px;
+  }
 }
 
 .meal-items-title {
   font-size: 24px;
+}
+
+.menu-item {
+  padding-bottom: 4px;
 }
 
 .tb-list {
@@ -36,4 +72,8 @@ body {
 .form-error {
   color: #f00;
   padding-top: 10px;
+}
+
+.signin-to-continue {
+  text-align: center;
 }

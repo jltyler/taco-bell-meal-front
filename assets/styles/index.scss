@@ -1,6 +1,39 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
+$tbpurple: rgb(54, 57, 154);
+$tbyellow: rgb(254, 224, 18);
+$tbpink: rgb(239, 24, 151);
+
+@font-face {
+  font-family: 'Taco Bell Old';
+  font-weight: bold;
+  src: url('./tacobellold.ttf');
+}
+
+body {
+  background-color: $tbpurple;
+  color: $tbyellow;
+  font-family: 'Taco Bell Old';
+}
+
+.navbar {
+  background-color: $tbpink;
+  border-color: $tbpink;
+  color: $tbyellow;
+}
+
 .meal-items-title {
   font-size: 24px;
+}
+
+.tb-list {
+  font-size: 16px;
+  height: 500px;
+  overflow-y: auto;
+}
+
+.form-error {
+  color: #f00;
+  padding-top: 10px;
 }

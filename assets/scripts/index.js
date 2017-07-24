@@ -7,6 +7,8 @@ const events = require('./events')
 $(() => {
   setAPIOrigin(location, config)
   events.attachHandlers()
+  events.onGetMenuItems()
+  $('#-signup-modal').modal('show')
 })
 
 // use require with a reference to bundle the file and use it in this file

@@ -11,27 +11,29 @@ const onSignUp = (event) => {
   event.preventDefault()
   const data = getFormFields(event.target)
   authApi.signUp(data)
-    .done(authUi.signUpSuccess
-      // function (response) {
-      // const sdata = {
-      //   credentials: {
-      //     email: data.credentials.email,
-      //     password: data.credentials.password
-      //   }
-      // }
-      // authApi.signIn(sdata)
-      //   .done(authUi.signInSuccess)
-      //   .catch(authUi.signInError)
-      // }
-    )
+    .done([authUi.signUpSuccess,
+      function (response) {
+        authApi.signIn(data)
+          .done(authUi.signInSuccess)
+          .catch(authUi.signInError)
+      }
+    ])
     .catch(authUi.signUpError)
 }
 
 const onSignIn = (event) => {
+  console.log('onSignIn')
   event.preventDefault()
   const data = getFormFields(event.target)
   authApi.signIn(data)
-    .done(authUi.signInSuccess)
+    .done([authUi.signInSuccess,
+      function (response) {
+        console.log('Sign in success. Getting meals...')
+        mealsApi.getMeals()
+        .done(mealsUi.getMealsSuccess)
+        .catch(mealsUi.getMealsError)
+      }
+    ])
     .catch(authUi.signInError)
 }
 
@@ -95,26 +97,32 @@ const onGetMealItems = (event) => {
 }
 
 const onGetMenuItems = (event) => {
-  event.preventDefault()
-  if (store.user) {
-    mealsApi.getMenuItems()
-    .done(mealsUi.getMenuItemsSuccess)
-    .catch(mealsUi.getMenuItemsError)
-  }
+  // event.preventDefault()
+  mealsApi.getMenuItems()
+  .done(mealsUi.getMenuItemsSuccess)
+  .catch(mealsUi.getMenuItemsError)
 }
 
 const attachHandlers = function () {
   // Auth API events
-  $('#-form-signup').on('submit', onSignUp)
-  $('#-form-signin').on('submit', onSignIn)
-  $('#-form-changepw').on('submit', onChangePassword)
-  $('#-button-logout').on('click', onSignOut)
-  $('#-form-add-meal').on('submit', onAddMeal)
+  // $('#-form-signup').on('submit', onSignUp)
+  $('#-signup-modal-form').on('submit', onSignUp)
+  // $('#-form-signin').on('submit', onSignIn)
+  $('#-signin-modal-form').on('submit', onSignIn)
+  $('#-signup-modal').on('hidden.bs.modal', authUi.signUpFormClear)
+  // $('#-form-changepw').on('submit', onChangePassword)
+  $('#-changepwd-modal-form').on('submit', onChangePassword)
+  $('#-changepwd-modal').on('hidden.bs.modal', authUi.changePasswordFormClear)
+  $('#-logout-button').on('click', onSignOut)
+  // $('#-form-add-meal').on('submit', onAddMeal)
+  $('#-addmeal-modal-form').on('submit', onAddMeal)
   $('#-button-get-meals').on('click', onGetMeals)
-  $('#-form-rename-meal').on('submit', onRenameMeal)
-  $('#-button-get-menu').on('click', onGetMenuItems)
+  // $('#-form-rename-meal').on('submit', onRenameMeal)
+  $('#-renamemeal-modal-form').on('submit', onRenameMeal)
+  // $('#-button-get-menu').on('click', onGetMenuItems)
 }
 
 module.exports = {
-  attachHandlers
+  attachHandlers,
+  onGetMenuItems
 }

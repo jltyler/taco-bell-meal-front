@@ -14,6 +14,7 @@ const selectMeal = function (event) {
     // Rename meal list title to this meals name
     mealTitleElement.text($(event.target).text())
     store.meal = mealId
+    $('#-renamemeal-button').removeClass('hidden')
   })
   .catch(getMealItemsError)
 }
@@ -31,8 +32,12 @@ const mealListElement = $('#-meal-list')
 const mealListTemplate = require('../templates/meal-list.handlebars')
 const mealTitleElement = $('#-meal-title')
 
-const populateMealList = (meals) => {
+const clearMealList = function () {
   mealListElement.html('')
+}
+
+const populateMealList = (meals) => {
+  clearMealList()
   console.log('Populating meals list')
   console.log(meals)
   const mealListHTML = mealListTemplate({meals})
@@ -44,8 +49,17 @@ const populateMealList = (meals) => {
 const addMealToList = (meal) => {
   const mealHTML = mealListTemplate({meals: [meal]})
   mealListElement.append(mealHTML)
+  $('.meal-button').off('click')
+  $('.meal-button').on('click', selectMeal)
+  $('.meal-button-delete').off('click')
+  $('.meal-button-delete').on('click', removeMeal)
   // $(mealListElement).children('[data-id="' + meal.id + '"]').addClass('active')
   // mealListElement.append('<button type="button" class="list-group-item list-group-item-action" data-id="' + meal.id + '">' + meal.name + '</button>')
+}
+
+const clearAddMealForm = function () {
+  $('#-addmeal-modal-form input').val('')
+  $('#-addmeal-error').addClass('hidden')
 }
 
 const addMealSuccess = function (response) {
@@ -54,12 +68,18 @@ const addMealSuccess = function (response) {
   addMealToList(response.meal) // Add meal to list of meals in the DOM
   store.meal = response.meal.id // Store meal for use later
   mealTitleElement.text(response.meal.name) // Rename meal list title to this meals name
-  // Populate Meal Item list
+  $('#-renamemeal-button').removeClass('hidden')
+  clearAddMealForm()
+  $('#-addmeal-modal').modal('hide')
+
+  // clear Meal Item list
+  clearMealItems()
 }
 
 const addMealError = function (response) {
   console.log('addMealError')
   console.log(response)
+  $('#-addmeal-error').removeClass('hidden')
 }
 
 const getMealsSuccess = function (response) {
@@ -77,13 +97,27 @@ const deleteMealSuccess = function (response) {
   console.log('deleteMealSuccess')
   console.log(response)
   // console.log($('[data-id=' + store.deleting + ']'))
-  $('.meal-button[data-id=' + store.deleting + ']').remove() // Remove the item clicked
-  $('.meal-button-delete[data-id=' + store.deleting + ']').remove()
+  console.log('store.deleting: ' + store.deleting)
+  console.log('store.meal: ' + store.meal)
+  if (store.deleting !== undefined && parseInt(store.deleting) === parseInt(store.meal)) {
+    console.log('Meal ' + store.meal + ' was selected!')
+    mealTitleElement.text('No meal selected!')
+    clearMealItems()
+    store.meal = undefined
+    $('#-renamemeal-button').addClass('hidden')
+  }
+  $('.meal-div[data-id=' + store.deleting + ']').remove() // Remove the item clicked
+  store.deleting = undefined
 }
 
 const deleteMealError = function (response) {
   console.log('deleteMealError')
   console.log(response)
+}
+
+const clearRenameMealForm = function () {
+  $('#-renamemeal-modal-form input').val('')
+  $('#-renamemeal-error').addClass('hidden')
 }
 
 const renameMealSuccess = function (response) {
@@ -92,19 +126,26 @@ const renameMealSuccess = function (response) {
   const meal = response.meal
   mealTitleElement.text(meal.name)
   $('.meal-button[data-id=' + meal.id + ']').text(meal.name)
-  $('#-form-rename-meal input').val('')
+  // $('#-form-rename-meal input').val('')
+  clearRenameMealForm()
+  $('#-renamemeal-modal').modal('hide')
 }
 
 const renameMealError = function (response) {
   console.log('renameMealError')
   console.log(response)
+  $('#-renamemeal-error').removeClass('hidden')
 }
 
 const mealItemsElement = $('#-meal-items-list')
 const mealItemsTemplate = require('../templates/meal-items.handlebars')
 
-const populateMealItems = function (items) {
+const clearMealItems = function () {
   mealItemsElement.html('')
+}
+
+const populateMealItems = function (items) {
+  clearMealItems()
   const mealItemsHTML = mealItemsTemplate({items}) // Use template to get HTML element(s)
   mealItemsElement.append(mealItemsHTML)
   $('.meal-item-button-delete').on('click', onDeleteMealItem)
@@ -149,6 +190,8 @@ const onAddMealItem = (event) => {
         name: $('.menu-item[data-id=' + menuId + ']').text()
       }]})
       mealItemsElement.append(mealItemsHTML)
+      $('.meal-item-button-delete').off('click')
+      $('.meal-item-button-delete').on('click', onDeleteMealItem)
     })
     .catch(addMealItemError)
   }

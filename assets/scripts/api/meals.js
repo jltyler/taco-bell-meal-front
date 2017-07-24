@@ -56,10 +56,7 @@ const getMealItems = (mealId) => {
 const getMenuItems = () => {
   return $.ajax({
     url: config.apiOrigin + '/menu-items',
-    method: 'GET',
-    headers: {
-      'Authorization': 'Token token=' + store.user.token
-    }
+    method: 'GET'
   })
 }
 

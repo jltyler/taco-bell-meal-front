@@ -50,6 +50,7 @@ const signOutSuccess = function (response) {
   $('#-signup-button').removeClass('hidden')
   $('#-logout-button').addClass('hidden')
   $('#-changepwd-button').addClass('hidden')
+  $('#-meal-list').html('')
   $('.meal-div').addClass('hidden')
   $('.meal-items-div').addClass('hidden')
   $('.signin-to-continue').removeClass('hidden')

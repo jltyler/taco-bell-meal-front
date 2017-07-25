@@ -14,10 +14,14 @@ const onSignUp = (event) => {
     .done([authUi.signUpSuccess,
       function (response) {
         authApi.signIn(data)
-          .done(authUi.signInSuccess)
+          .done([authUi.signInSuccess,
+            function (response) {
+              mealsApi.getMeals()
+              .done(mealsUi.getMealsSuccess)
+              .catch(mealsUi.getMealsError)
+            }])
           .catch(authUi.signInError)
-      }
-    ])
+      }])
     .catch(authUi.signUpError)
 }
 

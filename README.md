@@ -17,7 +17,7 @@ A SPA that interacts with the [Taco Bell® Meals API](https://github.com/jltyler
 - Add obnoxious sound effects
 
 ## Problems
-I ran into an issue when I realized I needed some custom routes that did not use the standard CRUD names or actions. I implemented these and things went fairly smoothly afterwards.
+I ran into an issue when I realized I needed some custom routes that did not use the standard CRUD names or actions. I also had trouble with assets when deploying. I fixed this by hosting some assets on an external site.
 
 ## User stories
 As a user...
@@ -28,5 +28,5 @@ As a user...
 - I can see the total price of all the Taco Bell® menu items in a list
 
 ## Wireframes
-[Front end](https://wireframe.cc/JF05W0)
-[ERD](https://wireframe.cc/lkk6G7)
+- [Front end](https://wireframe.cc/JF05W0)
+- [ERD](https://wireframe.cc/lkk6G7)

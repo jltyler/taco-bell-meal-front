@@ -46,6 +46,7 @@ const signOutSuccess = function (response) {
   console.log('signOutSuccess!')
   console.log(response)
   store.user = undefined
+  store.meal = undefined
   console.log('store.user:', store.user)
   $('#-signup-button').removeClass('hidden')
   $('#-logout-button').addClass('hidden')

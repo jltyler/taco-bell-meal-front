@@ -1,5 +1,5 @@
 # Taco Bell® Meals Front End
-## [Link to the app]{https://jltyler.github.io/taco-bell-meal-front}
+## [Link to the app](https://jltyler.github.io/taco-bell-meal-front)
 
 ## Maximize your Taco Bell® trip efficiency!
 A SPA that interacts with the [Taco Bell® Meals API](https://github.com/jltyler/taco-bell-meal-api) to let you create meals consisting of Taco Bell® menu items and save those meals. Counts up the total price for your list of Taco Bell® menu items and displays it for you. Also comes with a garish Taco Bell® color scheme and obnoxious Taco Bell® sound effects.

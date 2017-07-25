@@ -96,6 +96,14 @@ body {
   overflow-y: auto;
 }
 
+.tb-menu {
+  height: 600px;
+}
+
+.pink-line {
+  border-bottom: 5px solid $tbpink;
+}
+
 .form-error {
   color: #f00;
   padding-top: 10px;

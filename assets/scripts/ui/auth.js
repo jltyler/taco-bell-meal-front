@@ -54,7 +54,8 @@ const signOutSuccess = function (response) {
   $('.meal-items-div').addClass('hidden')
   $('.signin-to-continue').removeClass('hidden')
   $('#-meal-items-list').html('')
-  $('#-meal-title').text('No meal selected!')
+  $('#-meal-title h1').text('No meal selected!')
+  $('#-meal-items-price').addClass('hidden')
   $('#-renamemeal-button').addClass('hidden')
 }
 

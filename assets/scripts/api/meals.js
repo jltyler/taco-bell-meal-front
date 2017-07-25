@@ -67,7 +67,6 @@ const addMealItem = (menuItemId) => {
     headers: {
       'Authorization': 'Token token=' + store.user.token
     },
-    dataType: 'json text',
     data: {
       meal: {
         menu_item_id: menuItemId

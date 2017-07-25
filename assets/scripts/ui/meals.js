@@ -1,7 +1,14 @@
 const store = require('../store')
 const mealsApi = require('../api/meals')
+
 const bellSound = document.getElementById('-bell-snd')
 const yoquieroSound = document.getElementById('-yoquiero-snd')
+
+// MEALS
+
+const mealListElement = $('#-meal-list')
+const mealListTemplate = require('../templates/meal-list.handlebars')
+const mealTitleElement = $('#-meal-title').find('h1')
 
 const selectMeal = function (event) {
   console.log('selectMeal')
@@ -30,10 +37,6 @@ const removeMeal = function (event) {
   .done(deleteMealSuccess)
   .catch(deleteMealError)
 }
-
-const mealListElement = $('#-meal-list')
-const mealListTemplate = require('../templates/meal-list.handlebars')
-const mealTitleElement = $('#-meal-title').find('h1')
 
 const clearMealList = function () {
   mealListElement.html('')
@@ -78,6 +81,7 @@ const addMealSuccess = function (response) {
   yoquieroSound.play()
   // clear Meal Item list
   clearMealItems()
+  updateMealPrice()
 }
 
 const addMealError = function (response) {
@@ -109,6 +113,7 @@ const deleteMealSuccess = function (response) {
     clearMealItems()
     store.meal = undefined
     $('#-renamemeal-button').addClass('hidden')
+    mealItemsPriceElement.addClass('hidden')
   }
   $('.meal-div[data-id=' + store.deleting + ']').remove() // Remove the item clicked
   store.deleting = undefined
@@ -141,6 +146,8 @@ const renameMealError = function (response) {
   $('#-renamemeal-error').removeClass('hidden')
 }
 
+// MEAL ITEMS
+
 const mealItemsElement = $('#-meal-items-list')
 const mealItemsTemplate = require('../templates/meal-items.handlebars')
 
@@ -148,11 +155,25 @@ const clearMealItems = function () {
   mealItemsElement.html('')
 }
 
+const mealItemsPriceElement = $('#-meal-items-price')
+
+const updateMealPrice = function () {
+  console.log('updateMealPrice')
+  let sumTotal = 0
+  mealItemsElement.children().each(function (i, e) {
+    sumTotal += parseFloat($(e).data('cost'))
+  })
+  console.log('Total: ', sumTotal)
+  mealItemsPriceElement.removeClass('hidden')
+  mealItemsPriceElement.text('Total: $' + sumTotal.toFixed(2))
+}
+
 const populateMealItems = function (items) {
   clearMealItems()
   const mealItemsHTML = mealItemsTemplate({items}) // Use template to get HTML element(s)
   mealItemsElement.append(mealItemsHTML)
   $('.meal-item-button-delete').on('click', onDeleteMealItem)
+  updateMealPrice()
 }
 
 const getMealItemsSuccess = function (response) {
@@ -167,9 +188,6 @@ const getMealItemsError = function (response) {
   console.log(response)
 }
 
-const menuItemsElement = $('#-menu-items-list')
-const menuItemsTemplate = require('../templates/menu-items.handlebars')
-
 const onAddMealItem = (event) => {
   event.preventDefault()
   console.log('onAddMealItem: ', event)
@@ -177,20 +195,58 @@ const onAddMealItem = (event) => {
     const menuId = event.target.dataset.id
     console.log('Menu ID: ', menuId)
     mealsApi.addMealItem(menuId)
-    .done(function (response) {
-      addMealItemSuccess(response)
-      // Use template to get HTML element(s)
-      const mealItemsHTML = mealItemsTemplate({items: [{
-        id: menuId,
-        name: $('.menu-item[data-id=' + menuId + ']').text()
-      }]})
-      mealItemsElement.append(mealItemsHTML)
-      $('.meal-item-button-delete').off('click')
-      $('.meal-item-button-delete').on('click', onDeleteMealItem)
-    })
+    .done(addMealItemSuccess)
     .catch(addMealItemError)
   }
 }
+
+const addMealItemSuccess = function (response) {
+  console.log('addMealItemSuccess')
+  console.log(response)
+  console.log(response.menu_item)
+  const mealItemsHTML = mealItemsTemplate({items: [response.menu_item]})
+  mealItemsElement.append(mealItemsHTML)
+  $('.meal-item-button-delete').off('click')
+  $('.meal-item-button-delete').on('click', onDeleteMealItem)
+  updateMealPrice()
+  bellSound.play()
+}
+
+const addMealItemError = function (response) {
+  console.log('addMealItemError')
+  console.log(response)
+}
+
+const onDeleteMealItem = (event) => {
+  event.preventDefault()
+  console.log('onDeleteMealItem: ', event)
+  if (store.user && store.meal) {
+    const menuId = event.target.dataset.id
+    console.log('Menu ID: ', menuId)
+    mealsApi.deleteMealItem(menuId)
+    .done(function (response) {
+      $(event.target).closest('.meal-item').remove()
+      deleteMealItemSuccess(response)
+    })
+    .catch(deleteMealItemError)
+  }
+}
+
+const deleteMealItemSuccess = function (response) {
+  console.log('deleteMealItemSuccess')
+  console.log(response)
+  updateMealPrice()
+}
+
+const deleteMealItemError = function (response) {
+  console.log('deleteMealItemError')
+  console.log(response)
+}
+
+// MENU ITEMS
+
+const menuItemsElement = $('#-menu-items-list')
+const menuItemsTemplate = require('../templates/menu-items.handlebars')
 
 const populateMenuItems = function (items) {
   menuItemsElement.html('')
@@ -208,44 +264,6 @@ const getMenuItemsSuccess = function (response) {
 
 const getMenuItemsError = function (response) {
   console.log('getMenuItemsError')
-  console.log(response)
-}
-
-const addMealItemSuccess = function (response) {
-  console.log('addMealItemSuccess')
-  console.log(response)
-  bellSound.play()
-}
-
-const addMealItemError = function (response) {
-  console.log('addMealItemError')
-  console.log(response)
-}
-
-const onDeleteMealItem = (event) => {
-  event.preventDefault()
-  console.log('onDeleteMealItem: ', event)
-  if (store.user && store.meal) {
-    const menuId = event.target.dataset.id
-    console.log('Menu ID: ', menuId)
-    mealsApi.deleteMealItem(menuId)
-    .done(function (response) {
-      deleteMealItemSuccess(response)
-      // $('meal-item[data-id=' + menuId + ']').remove()
-      $(event.target).closest('.meal-item').remove()
-      // $('meal-item-button-delete[data-id=' + menuId + ']').remove()
-    })
-    .catch(deleteMealItemError)
-  }
-}
-
-const deleteMealItemSuccess = function (response) {
-  console.log('deleteMealItemSuccess')
-  console.log(response)
-}
-
-const deleteMealItemError = function (response) {
-  console.log('deleteMealItemError')
   console.log(response)
 }
 

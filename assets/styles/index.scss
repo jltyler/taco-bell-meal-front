@@ -2,8 +2,27 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
 $tbpurple: rgb(54, 57, 154);
+$tbpurple-alpha: rgba(54, 57, 154, 0.6);
 $tbyellow: rgb(254, 224, 18);
 $tbpink: rgb(239, 24, 151);
+
+$breakpoints: (
+  'tiny':   ( max-width:  767px ),
+  'small':  ( max-width:  768px ),
+  'medium': ( max-width:  992px ),
+  'large':  ( max-width: 1200px )
+);
+
+@mixin breakpoint($name) {
+      @if map-has-key($breakpoints, $name) {
+        @media #{inspect(map-get($breakpoints, $name))} {
+      @content;
+    }
+  }
+  @else {
+    @warn "Couldn't find a breakpoint named `#{$name}`.";
+  }
+}
 
 @font-face {
   font-family: 'Taco Bell Old';
@@ -15,6 +34,37 @@ body {
   background-color: $tbpurple;
   color: $tbyellow;
   font-family: 'Taco Bell Old';
+  background-image: url('https://dl.dropboxusercontent.com/s/ww8i2ivpq1skno0/tblogomod.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.btn-purple {
+  background-color: $tbpurple;
+  color: $tbyellow;
+}
+
+.btn-purple:hover {
+  color: $tbpink;
+}
+
+.btn-yellow {
+  background-color: $tbyellow;
+  color: $tbpurple;
+}
+
+.btn-yellow:hover {
+  color: $tbpink;
+}
+
+.btn-pink {
+  background-color: $tbpink;
+  color: $tbyellow;
+}
+
+.btn-pink:hover {
+  color: $tbpurple;
 }
 
 .navbar {
@@ -28,6 +78,10 @@ body {
   }
 }
 
+.navbar-toggle span.icon-bar{
+  color: $tbyellow;
+}
+
 .navbar .navbar-nav li a:hover,
 .navbar .navbar-nav li a:focus,
 .navbar .navbar-brand:hover {
@@ -37,6 +91,12 @@ body {
 .meal-items-title {
   margin: 0 auto 10px;
   text-align: center;
+}
+
+.meal-items-section,
+.meals-section,
+.menu-items-div {
+  background-color: $tbpurple-alpha;
 }
 
 .meal-button {
@@ -92,16 +152,22 @@ body {
 
 .tb-list {
   font-size: 16px;
-  height: 500px;
+  max-height: 500px;
   overflow-y: auto;
 }
 
 .tb-menu {
-  height: 600px;
+  max-height: 590px;
 }
 
 .pink-line {
   border-bottom: 5px solid $tbpink;
+}
+
+.pink-line-top {
+  @include breakpoint('large') {
+    border-top: 5px solid $tbpink;
+  }
 }
 
 .form-error {
@@ -111,4 +177,22 @@ body {
 
 .signin-to-continue {
   text-align: center;
+}
+
+.chihuahua {
+  position: fixed;
+  left: -1000px;
+  top: 0;
+  transition: left 0.5s ease;
+  z-index: 100;
+  @include breakpoint('medium') {
+    top: -200px;
+  }
+}
+
+.chihuahua-active {
+  left: -300px;
+  @include breakpoint('medium') {
+    left: -500px;
+  }
 }

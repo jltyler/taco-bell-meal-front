@@ -39,16 +39,17 @@
     </nav>
     <!-- NAVBAR END -->
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-lg-3 meals-section">
         <div class="meal-div hidden">
           <h1 class="text-center">Meals</h1>
-          <button id="-addmeal-button" class="btn btn-lg btn-primary btn-block" data-toggle="modal" data-target="#-addmeal-modal">New meal</button>
+          <button id="-addmeal-button" class="btn btn-lg btn-pink btn-block" data-toggle="modal" data-target="#-addmeal-modal">New meal</button>
           <br />
           <div class="pink-line"></div>
           <div class="tb-list" id="-meal-list"></div>
         </div>
       </div>
-      <div class="col-lg-5">
+      <div class="col-lg-5 meal-items-section">
+        <div class="pink-line-top"></div>
         <div class="signin-to-continue">
           <h1>Sign in to continue!</h1>
         </div>
@@ -57,7 +58,7 @@
             <h1>No meal selected!</h1>
           <!-- </div>
           <div class="meal-items-title"> -->
-            <button id="-renamemeal-button" class="btn btn-lg btn-primary hidden" data-toggle="modal" data-target="#-renamemeal-modal"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+            <button id="-renamemeal-button" class="btn btn-lg btn-pink hidden" data-toggle="modal" data-target="#-renamemeal-modal"><i class="fa fa-pencil" aria-hidden="true"></i></button>
             <h2 class="hidden" id="-meal-items-price"></h2>
           </div>
           <div class="pink-line"></div>
@@ -65,6 +66,7 @@
         </div>
       </div>
       <div class="col-lg-4 menu-items-div">
+        <div class="pink-line-top"></div>
         <h1 class="text-center">Menu</h1>
         <div class="pink-line"></div>
         <div class="tb-list tb-menu" id="-menu-items-list"></div>
@@ -75,6 +77,7 @@
     <audio id="-bell-snd" src="https://dl.dropboxusercontent.com/s/mzdilamfbxyz08f/bell.mp3" ></audio>
     <!-- <audio id="-yoquiero-snd" src="/assets/snd/yoquiero.mp3" ></audio> -->
     <audio id="-yoquiero-snd" src="https://dl.dropboxusercontent.com/s/0p1fc3s29za7pu1/yoquiero.mp3" ></audio>
+    <img class="chihuahua" src="https://dl.dropboxusercontent.com/s/khnc52fqbq7u9gl/chihuahua.png" alt="YO GUIERO TACO BELL">
     <!-- ONLY MODALS BEYOND THIS POINT -->
     <!-- Sign up / log in modal -->
     <div class="modal fade" id="-signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

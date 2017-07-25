@@ -4,6 +4,11 @@ const mealsApi = require('../api/meals')
 const bellSound = document.getElementById('-bell-snd')
 const yoquieroSound = document.getElementById('-yoquiero-snd')
 
+const animateChihuahua = function () {
+  $('.chihuahua').addClass('chihuahua-active')
+  setTimeout(function () { $('.chihuahua').removeClass('chihuahua-active') }, 1800)
+}
+
 // MEALS
 
 const mealListElement = $('#-meal-list')
@@ -25,6 +30,7 @@ const selectMeal = function (event) {
     store.meal = mealId
     $('#-renamemeal-button').removeClass('hidden')
     yoquieroSound.play()
+    animateChihuahua()
   })
   .catch(getMealItemsError)
 }

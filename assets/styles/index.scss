@@ -78,8 +78,15 @@ body {
   }
 }
 
-.navbar-toggle span.icon-bar{
-  color: $tbyellow;
+#-collapse-nav,
+#-collapse-nav:focus,
+#-collapse-nav:active {
+  border-color: $tbyellow;
+  background-color: $tbpink;
+}
+
+#-collapse-nav:hover {
+  background-color: $tbpurple;
 }
 
 .navbar .navbar-nav li a:hover,

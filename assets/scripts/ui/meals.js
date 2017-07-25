@@ -2,7 +2,9 @@ const store = require('../store')
 const mealsApi = require('../api/meals')
 
 const bellSound = document.getElementById('-bell-snd')
+bellSound.load()
 const yoquieroSound = document.getElementById('-yoquiero-snd')
+yoquieroSound.load()
 
 const animateChihuahua = function () {
   $('.chihuahua').addClass('chihuahua-active')

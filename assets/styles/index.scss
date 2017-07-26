@@ -203,3 +203,41 @@ body {
     left: -500px;
   }
 }
+
+.chihuahua-right {
+  position: fixed;
+  right: -1000px;
+  top: 0;
+  transform: rotate(180deg);
+  transition: right 0.5s ease;
+  z-index: 100;
+  @include breakpoint('medium') {
+    top: -200px;
+  }
+}
+
+.chihuahua-right-active {
+  right: -300px;
+  @include breakpoint('medium') {
+    right: -500px;
+  }
+}
+
+.chihuahua-bottom {
+  position: fixed;
+  bottom: -1000px;
+  left: 100px;
+  transform: rotate(270deg);
+  transition: bottom 0.5s ease;
+  z-index: 100;
+  @include breakpoint('medium') {
+    top: -200px;
+  }
+}
+
+.chihuahua-bottom-active {
+  bottom: -300px;
+  @include breakpoint('medium') {
+    bottom: -500px;
+  }
+}

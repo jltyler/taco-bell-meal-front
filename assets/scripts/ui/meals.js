@@ -6,9 +6,17 @@ bellSound.load()
 const yoquieroSound = document.getElementById('-yoquiero-snd')
 yoquieroSound.load()
 
+const choose = function (choices) {
+  const index = Math.floor(Math.random() * choices.length)
+  return choices[index]
+}
+
 const animateChihuahua = function () {
-  $('.chihuahua').addClass('chihuahua-active')
-  setTimeout(function () { $('.chihuahua').removeClass('chihuahua-active') }, 1800)
+  const choice = choose(['chihuahua-right', 'chihuahua', 'chihuahua-bottom'])
+  // $('.chihuahua-right').addClass('chihuahua-right-active')
+  // setTimeout(function () { $('.chihuahua-right').removeClass('chihuahua-right-active') }, 1800)
+  $('.' + choice).addClass(choice + '-active')
+  setTimeout(function () { $('.' + choice).removeClass(choice + '-active') }, 1800)
 }
 
 // MEALS

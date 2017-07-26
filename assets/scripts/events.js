@@ -26,13 +26,13 @@ const onSignUp = (event) => {
 }
 
 const onSignIn = (event) => {
-  console.log('onSignIn')
+  // console.log('onSignIn')
   event.preventDefault()
   const data = getFormFields(event.target)
   authApi.signIn(data)
     .done([authUi.signInSuccess,
       function (response) {
-        console.log('Sign in success. Getting meals...')
+        // console.log('Sign in success. Getting meals...')
         mealsApi.getMeals()
         .done(mealsUi.getMealsSuccess)
         .catch(mealsUi.getMealsError)
@@ -109,21 +109,17 @@ const onGetMenuItems = (event) => {
 
 const attachHandlers = function () {
   // Auth API events
-  // $('#-form-signup').on('submit', onSignUp)
-  $('#-signup-modal-form').on('submit', onSignUp)
-  // $('#-form-signin').on('submit', onSignIn)
   $('#-signin-modal-form').on('submit', onSignIn)
+  $('#-signup-modal-form').on('submit', onSignUp)
   $('#-signup-modal').on('hidden.bs.modal', authUi.signUpFormClear)
-  // $('#-form-changepw').on('submit', onChangePassword)
   $('#-changepwd-modal-form').on('submit', onChangePassword)
   $('#-changepwd-modal').on('hidden.bs.modal', authUi.changePasswordFormClear)
   $('#-logout-button').on('click', onSignOut)
-  // $('#-form-add-meal').on('submit', onAddMeal)
   $('#-addmeal-modal-form').on('submit', onAddMeal)
+  $('#-addmeal-modal').on('hidden.bs.modal', authUi.clearAddMealForm)
   $('#-button-get-meals').on('click', onGetMeals)
-  // $('#-form-rename-meal').on('submit', onRenameMeal)
   $('#-renamemeal-modal-form').on('submit', onRenameMeal)
-  // $('#-button-get-menu').on('click', onGetMenuItems)
+  $('#-renamemeal-modal').on('hidden.bs.modal', authUi.clearRenameMealForm)
 }
 
 module.exports = {

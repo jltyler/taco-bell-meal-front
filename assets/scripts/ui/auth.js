@@ -1,13 +1,13 @@
 const store = require('../store')
 
 const signUpSuccess = function (response) {
-  console.log('signUpSuccess!')
-  console.log(response)
+  // console.log('signUpSuccess!')
+  // console.log(response)
 }
 
 const signUpError = function (response) {
-  console.log('signUpError!')
-  console.log(response)
+  // console.log('signUpError!')
+  // console.log(response)
   $('#-signup-error').removeClass('hidden')
 }
 
@@ -23,10 +23,10 @@ const signUpFormClear = function () {
 }
 
 const signInSuccess = function (response) {
-  console.log('signInSuccess!')
-  console.log(response)
+  // console.log('signInSuccess!')
+  // console.log(response)
   store.user = response.user
-  console.log('store.user:', store.user)
+  // console.log('store.user:', store.user)
   $('#-signup-modal').modal('hide')
   $('#-signup-button').addClass('hidden')
   $('#-logout-button').removeClass('hidden')
@@ -37,17 +37,17 @@ const signInSuccess = function (response) {
 }
 
 const signInError = function (response) {
-  console.log('signInError!')
-  console.log(response)
+  // console.log('signInError!')
+  // console.log(response)
   $('#-signin-error').removeClass('hidden')
 }
 
 const signOutSuccess = function (response) {
-  console.log('signOutSuccess!')
-  console.log(response)
+  // console.log('signOutSuccess!')
+  // console.log(response)
   store.user = undefined
   store.meal = undefined
-  console.log('store.user:', store.user)
+  // console.log('store.user:', store.user)
   $('#-signup-button').removeClass('hidden')
   $('#-logout-button').addClass('hidden')
   $('#-changepwd-button').addClass('hidden')
@@ -62,8 +62,8 @@ const signOutSuccess = function (response) {
 }
 
 const signOutError = function (response) {
-  console.log('signOutError!')
-  console.log(response)
+  // console.log('signOutError!')
+  // console.log(response)
 }
 
 const changePasswordFormClear = function () {
@@ -72,14 +72,14 @@ const changePasswordFormClear = function () {
 }
 
 const changePasswordSuccess = function (response) {
-  console.log('changePasswordSuccess!')
-  console.log(response)
+  // console.log('changePasswordSuccess!')
+  // console.log(response)
   $('#-changepwd-modal').modal('hide')
 }
 
 const changePasswordError = function (response) {
-  console.log('changePasswordError!')
-  console.log(response)
+  // console.log('changePasswordError!')
+  // console.log(response)
   $('#-changepwd-error').removeClass('hidden')
 }
 

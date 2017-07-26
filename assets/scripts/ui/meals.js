@@ -87,6 +87,7 @@ const addMealSuccess = function (response) {
   $('#-addmeal-modal').modal('hide')
 
   yoquieroSound.play()
+  animateChihuahua()
   // clear Meal Item list
   clearMealItems()
   updateMealPrice()

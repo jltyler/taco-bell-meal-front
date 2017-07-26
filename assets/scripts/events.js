@@ -116,10 +116,10 @@ const attachHandlers = function () {
   $('#-changepwd-modal').on('hidden.bs.modal', authUi.changePasswordFormClear)
   $('#-logout-button').on('click', onSignOut)
   $('#-addmeal-modal-form').on('submit', onAddMeal)
-  $('#-addmeal-modal').on('hidden.bs.modal', authUi.clearAddMealForm)
+  $('#-addmeal-modal').on('hidden.bs.modal', mealsUi.clearAddMealForm)
   $('#-button-get-meals').on('click', onGetMeals)
   $('#-renamemeal-modal-form').on('submit', onRenameMeal)
-  $('#-renamemeal-modal').on('hidden.bs.modal', authUi.clearRenameMealForm)
+  $('#-renamemeal-modal').on('hidden.bs.modal', mealsUi.clearRenameMealForm)
 }
 
 module.exports = {

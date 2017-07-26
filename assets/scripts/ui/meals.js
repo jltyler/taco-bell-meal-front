@@ -21,7 +21,7 @@ const selectMeal = function (event) {
   // console.log('selectMeal')
   const mealId = event.target.dataset.id
   // console.log('ID: ', mealId)
-  console.log('Event:', event.target)
+  // console.log('Event:', event.target)
    // API call to get meal items
    // Populate Meal Item list
   mealsApi.getMealItems(mealId)
@@ -113,7 +113,7 @@ const getMealsError = function (response) {
 const deleteMealSuccess = function (response) {
   // console.log('deleteMealSuccess')
   // console.log(response)
-  console.log($('[data-id=' + store.deleting + ']'))
+  // console.log($('[data-id=' + store.deleting + ']'))
   // console.log('store.deleting: ' + store.deleting)
   // console.log('store.meal: ' + store.meal)
   if (store.deleting !== undefined && parseInt(store.deleting) === parseInt(store.meal)) {

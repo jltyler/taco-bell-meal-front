@@ -40,6 +40,7 @@ const selectMeal = function (event) {
     store.meal = mealId
     $('#-renamemeal-button').removeClass('hidden')
     yoquieroSound.play()
+    menuItemsElement.removeClass('hidden')
     animateChihuahua()
   })
   .catch(getMealItemsError)
@@ -94,6 +95,7 @@ const addMealSuccess = function (response) {
   clearAddMealForm()
   $('#-addmeal-modal').modal('hide')
 
+  menuItemsElement.removeClass('hidden')
   yoquieroSound.play()
   animateChihuahua()
   // clear Meal Item list
@@ -128,6 +130,7 @@ const deleteMealSuccess = function (response) {
     // console.log('Meal ' + store.meal + ' was selected!')
     mealTitleElement.text('No meal selected!')
     clearMealItems()
+    menuItemsElement.addClass('hidden')
     store.meal = undefined
     $('#-renamemeal-button').addClass('hidden')
     mealItemsPriceElement.addClass('hidden')

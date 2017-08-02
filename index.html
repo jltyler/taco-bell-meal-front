@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Taco Bell Meals</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Do not add `link` tags unless you know what you are doing -->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Do not add `script` tags unless you know what you are doing -->
+    <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+    <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    <script src="https://use.fontawesome.com/4edafb88a2.js"></script>
+  </head>
+  <body class="container-fluid">
+    <!-- NAVBAR START -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#-main-navbar-collapse" aria-expanded="false" id="-collapse-nav">
+            <span class="sr-only">Toggle navigation</span>
+            <span>Menu</span>
+          </button>
+          <span class="navbar-brand" href="#">Taco Bell Meals</span>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="-main-navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a class="hidden" id="-options-button" href="#" data-toggle="modal" data-target="#-options-modal">Options</a></li>
+            <li><a class="hidden" id="-changepwd-button" href="#" data-toggle="modal" data-target="#-changepwd-modal">Change Password</a></li>
+            <li><a class="hidden" id="-logout-button" href="#">Logout</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#-signup-modal" id="-signup-button">Login or Signup</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <!-- NAVBAR END -->
+    <div class="row">
+      <div class="col-lg-3 meals-section">
+        <div class="pink-line-top"></div>
+        <div class="meal-div hidden">
+          <h1 class="text-center">Select or create a meal</h1>
+          <button id="-addmeal-button" class="btn btn-lg btn-pink btn-block" data-toggle="modal" data-target="#-addmeal-modal">New meal</button>
+          <br />
+          <div class="pink-line"></div>
+          <div class="tb-list" id="-meal-list"></div>
+        </div>
+      </div>
+      <div class="col-lg-5 meal-items-section">
+        <div class="pink-line-top"></div>
+        <div class="signin-to-continue">
+          <h1>Sign in to continue!</h1>
+        </div>
+        <div class="meal-items-div hidden">
+          <div id="-meal-title" class="meal-items-title">
+            <h1>No meal selected!</h1>
+          <!-- </div>
+          <div class="meal-items-title"> -->
+            <button id="-renamemeal-button" class="btn btn-lg btn-pink hidden" data-toggle="modal" data-target="#-renamemeal-modal"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+            <h2 class="hidden" id="-meal-items-price"></h2>
+          </div>
+          <div class="pink-line"></div>
+          <div class="tb-list" id="-meal-items-list"></div>
+        </div>
+      </div>
+      <div class="col-lg-4 menu-items-div">
+        <div class="pink-line-top"></div>
+        <h1 class="text-center">Menu</h1>
+        <div class="pink-line"></div>
+        <h2 class="text-center" id="-menu-instruct">select a meal to see the menu!</h2>
+        <div class="tb-list tb-menu hidden" id="-menu-items-list"></div>
+      </div>
+    </div>
+    <!-- END MAIN CONTENT -->
+    <!-- <audio id="-bell-snd" src="/assets/snd/bell.mp3" ></audio> -->
+    <audio id="-bell-snd" src="https://dl.dropboxusercontent.com/s/mzdilamfbxyz08f/bell.mp3" ></audio>
+    <!-- <audio id="-yoquiero-snd" src="/assets/snd/yoquiero.mp3" ></audio> -->
+    <audio id="-yoquiero-snd" src="https://dl.dropboxusercontent.com/s/0p1fc3s29za7pu1/yoquiero.mp3" ></audio>
+    <img class="chihuahua" src="https://dl.dropboxusercontent.com/s/khnc52fqbq7u9gl/chihuahua.png" alt="YO GUIERO TACO BELL">
+    <img class="chihuahua-right" src="https://dl.dropboxusercontent.com/s/khnc52fqbq7u9gl/chihuahua.png" alt="YO GUIERO TACO BELL">
+    <img class="chihuahua-bottom" src="https://dl.dropboxusercontent.com/s/khnc52fqbq7u9gl/chihuahua.png" alt="YO GUIERO TACO BELL">
+    <!-- ONLY MODALS BEYOND THIS POINT -->
+    <!-- Sign up / log in modal -->
+    <div class="modal fade" id="-signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Sign in header-->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+               <span aria-hidden="true">&times;</span>
+               <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title" id="-signin-modal-title">
+                Log in
+            </h4>
+          </div>
+          <!-- Sign in Body -->
+          <div class="modal-body">
+            <form class="form-horizontal" id="-signin-modal-form" role="signup-form">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="-signin-modal-email">Username</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="-signin-modal-email" placeholder="Username" name="credentials[email]" value=""/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="-signin-modal-pwd">Password</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="-signin-modal-pwd" placeholder="Password" name="credentials[password]" value=""/>
+                  <div id="-signin-error" class="hidden form-error">
+                    Invalid username or password!
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default">Log in</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- Sign up Header -->
+          <div class="modal-header">
+            <h4 class="modal-title" id="-signup-modal-title">
+                Sign up
+            </h4>
+          </div>
+          <!-- Sign up Body -->
+          <div class="modal-body">
+            <form class="form-horizontal" id="-signup-modal-form" role="signup-form">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="-signup-modal-email">Username</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="-signup-modal-email" placeholder="Username" name="credentials[email]"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="-signup-modal-pwd">Password</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="-signup-modal-pwd" placeholder="Password" name="credentials[password]" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="-signup-modal-cpwd">Confirm</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="-signup-modal-cpwd" placeholder="Password Confirmation" name="credentials[password_confirmation]" />
+                  <div id="-signup-error" class="hidden form-error">
+                    There was an error signing up!
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default">Sign up</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End sign up modal -->
+    <!-- Change password modal -->
+    <div class="modal fade" id="-changepwd-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+               <span aria-hidden="true">&times;</span>
+               <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title" id="-changepwd-modal-title">
+                Change password
+            </h4>
+          </div>
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <form class="form-horizontal" id="-changepwd-modal-form" role="signup-form">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="-changepwd-modal-email">Old</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="-changepwd-modal-email" placeholder="Old Password" name="passwords[old]"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="-changepwd-modal-pwd">New</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="-changepwd-modal-pwd" placeholder="New Password" name="passwords[new]" />
+                <div id="-changepwd-error" class="hidden form-error">
+                  There was an error!
+                </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default">Change</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End change password modal -->
+    <!-- Options modal -->
+    <div class="modal fade" id="-options-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+               <span aria-hidden="true">&times;</span>
+               <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title" id="-changepwd-modal-title">
+                Options
+            </h4>
+          </div>
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" id="-options-modal-funmode" type="checkbox" value="">
+                Very fun mode
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End options modal -->
+    <!-- Add meal modal -->
+    <div class="modal fade" id="-addmeal-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+               <span aria-hidden="true">&times;</span>
+               <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title" id="-addmeal-modal-title">
+                Add meal
+            </h4>
+          </div>
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <form class="form-horizontal" id="-addmeal-modal-form" role="signup-form">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="-changepwd-modal-email">Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="-addmeal-modal-name" placeholder="New name" name="meal[name]"/>
+                  <div id="-addmeal-error" class="hidden form-error">
+                    There was an error!
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default">Add</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End add meal modal -->
+    <!-- Rename meal modal -->
+    <div class="modal fade" id="-renamemeal-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+               <span aria-hidden="true">&times;</span>
+               <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title" id="-renamemeal-modal-title">
+                Rename meal
+            </h4>
+          </div>
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <form class="form-horizontal" id="-renamemeal-modal-form" role="signup-form">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="-changepwd-modal-email">Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="-renamemeal-modal-name" placeholder="New name" name="meal[name]"/>
+                  <div id="-renamemeal-error" class="hidden form-error">
+                    There was an error!
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default">Change</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End rename meal modal -->
+  </body>
+</html>

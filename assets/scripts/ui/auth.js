@@ -30,6 +30,7 @@ const signInSuccess = function (response) {
   $('#-signup-modal').modal('hide')
   $('#-signup-button').addClass('hidden')
   $('#-logout-button').removeClass('hidden')
+  $('#-options-button').removeClass('hidden')
   $('#-changepwd-button').removeClass('hidden')
   $('.meal-div').removeClass('hidden')
   $('.meal-items-div').removeClass('hidden')
@@ -50,6 +51,7 @@ const signOutSuccess = function (response) {
   // console.log('store.user:', store.user)
   $('#-signup-button').removeClass('hidden')
   $('#-logout-button').addClass('hidden')
+  $('#-options-button').addClass('hidden')
   $('#-changepwd-button').addClass('hidden')
   $('#-meal-list').html('')
   $('.meal-div').addClass('hidden')
@@ -60,6 +62,7 @@ const signOutSuccess = function (response) {
   $('#-meal-items-price').addClass('hidden')
   $('#-renamemeal-button').addClass('hidden')
   $('#-menu-items-list').addClass('hidden')
+  $('#-menu-instruct').removeClass('hidden')
 }
 
 const signOutError = function (response) {

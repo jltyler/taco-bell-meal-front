@@ -6,6 +6,8 @@ bellSound.load()
 const yoquieroSound = document.getElementById('-yoquiero-snd')
 yoquieroSound.load()
 
+const funModeCheckBox = $('#-options-modal-funmode')
+
 const choose = function (choices) {
   const index = Math.floor(Math.random() * choices.length)
   return choices[index]
@@ -39,9 +41,12 @@ const selectMeal = function (event) {
     mealTitleElement.text($(event.target).text())
     store.meal = mealId
     $('#-renamemeal-button').removeClass('hidden')
-    yoquieroSound.play()
     menuItemsElement.removeClass('hidden')
-    animateChihuahua()
+    menuInstructionsElement.addClass('hidden')
+    if (funModeCheckBox.is(':checked')) {
+      yoquieroSound.play()
+      animateChihuahua()
+    }
   })
   .catch(getMealItemsError)
 }
@@ -96,8 +101,11 @@ const addMealSuccess = function (response) {
   $('#-addmeal-modal').modal('hide')
 
   menuItemsElement.removeClass('hidden')
-  yoquieroSound.play()
-  animateChihuahua()
+  menuInstructionsElement.addClass('hidden')
+  if (funModeCheckBox.is(':checked')) {
+    yoquieroSound.play()
+    animateChihuahua()
+  }
   // clear Meal Item list
   clearMealItems()
   updateMealPrice()
@@ -134,6 +142,7 @@ const deleteMealSuccess = function (response) {
     store.meal = undefined
     $('#-renamemeal-button').addClass('hidden')
     mealItemsPriceElement.addClass('hidden')
+    menuInstructionsElement.removeClass('hidden')
   }
   $('.meal-div[data-id=' + store.deleting + ']').remove() // Remove the item clicked
   store.deleting = undefined
@@ -229,7 +238,9 @@ const addMealItemSuccess = function (response) {
   $('.meal-item-button-delete').off('click')
   $('.meal-item-button-delete').on('click', onDeleteMealItem)
   updateMealPrice()
-  bellSound.play()
+  if (funModeCheckBox.is(':checked')) {
+    bellSound.play()
+  }
 }
 
 const addMealItemError = function (response) {
@@ -267,6 +278,7 @@ const deleteMealItemError = function (response) {
 
 const menuItemsElement = $('#-menu-items-list')
 const menuItemsTemplate = require('../templates/menu-items.handlebars')
+const menuInstructionsElement = $('#-menu-instruct')
 
 const populateMenuItems = function (items) {
   menuItemsElement.html('')

@@ -28,8 +28,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="-main-navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a class="hidden" id="-logout-button" href="#">Logout</a></li>
+            <li><a class="hidden" id="-options-button" href="#" data-toggle="modal" data-target="#-options-modal">Options</a></li>
             <li><a class="hidden" id="-changepwd-button" href="#" data-toggle="modal" data-target="#-changepwd-modal">Change Password</a></li>
+            <li><a class="hidden" id="-logout-button" href="#">Logout</a></li>
             <li><a href="#" data-toggle="modal" data-target="#-signup-modal" id="-signup-button">Login or Signup</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
@@ -40,7 +41,7 @@
       <div class="col-lg-3 meals-section">
         <div class="pink-line-top"></div>
         <div class="meal-div hidden">
-          <h1 class="text-center">Meals</h1>
+          <h1 class="text-center">Select or create a meal</h1>
           <button id="-addmeal-button" class="btn btn-lg btn-pink btn-block" data-toggle="modal" data-target="#-addmeal-modal">New meal</button>
           <br />
           <div class="pink-line"></div>
@@ -68,6 +69,7 @@
         <div class="pink-line-top"></div>
         <h1 class="text-center">Menu</h1>
         <div class="pink-line"></div>
+        <h2 class="text-center" id="-menu-instruct">select a meal to see the menu!</h2>
         <div class="tb-list tb-menu hidden" id="-menu-items-list"></div>
       </div>
     </div>
@@ -203,6 +205,33 @@
       </div>
     </div>
     <!-- End change password modal -->
+    <!-- Options modal -->
+    <div class="modal fade" id="-options-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+               <span aria-hidden="true">&times;</span>
+               <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title" id="-changepwd-modal-title">
+                Options
+            </h4>
+          </div>
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" id="-options-modal-funmode" type="checkbox" value="">
+                Very fun mode
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End options modal -->
     <!-- Add meal modal -->
     <div class="modal fade" id="-addmeal-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
